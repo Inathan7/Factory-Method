@@ -1,6 +1,11 @@
 package ui;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 
 /**
  * TODO FACTORY.METHOD.01.3
@@ -14,21 +19,32 @@ import javax.swing.JFrame;
  */
 public abstract class Aplicacao {
 	
+	private JFrame janela = new JFrame();  // ADICIONEI ESSE ATRIBUTO PARA PODER CHAMAR MÉTODOS DE JFRAME - INATHAN
 	
 	//correspondente da logica 01, do main() de ClienteAplicacaoaA
 	public void instalarListenerFechamento() {
-		
+		janela.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});
 	}
 	
 	//correspondente da logica 02, do main() de ClienteAplicacaoA
 	public void instalarAreasDeLayout() {
-		
+		JSplitPane split = new JSplitPane();
+		split.setLeftComponent(new JPanel());
+		split.setRightComponent(new JPanel());
+		split.setDividerLocation(350);
+		janela.add(split);
 	}
 	
 	
 	//correspondente da logica 03, do main() de ClienteAplicacaoA
 	public JFrame iniciar() {
-		return null;
+		janela.setVisible(true);
+		return janela;
 	}
 	
 	//factory-method
