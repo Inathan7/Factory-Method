@@ -1,5 +1,8 @@
 package main;
 
+import ui.Aplicacao;
+import ui.ModoAppEscuro;
+
 public class ClienteAplicacaoB {
 
 	
@@ -15,7 +18,12 @@ public class ClienteAplicacaoB {
 		 * 
 		 */
 		
+		Aplicacao aplicacao = null;
 		
+		aplicacao = new ModoAppEscuro();
+		aplicacao.instalarListenerFechamento();
+		aplicacao.instalarAreasDeLayout();
+		aplicacao.iniciar();
 		
 	}
 }

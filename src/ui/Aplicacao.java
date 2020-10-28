@@ -19,7 +19,7 @@ import javax.swing.JSplitPane;
  */
 public abstract class Aplicacao {
 	
-	private JFrame janela = new JFrame();  // ADICIONEI ESSE ATRIBUTO PARA PODER CHAMAR MÉTODOS DE JFRAME - INATHAN
+	private JFrame janela = fabricarJFrame();  // ADICIONEI ESSE ATRIBUTO PARA PODER CHAMAR MÉTODOS DE JFRAME - INATHAN
 	
 	//correspondente da logica 01, do main() de ClienteAplicacaoaA
 	public void instalarListenerFechamento() {

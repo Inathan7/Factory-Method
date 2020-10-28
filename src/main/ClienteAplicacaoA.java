@@ -1,14 +1,7 @@
 package main;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
-import javax.swing.JPanel;
-import javax.swing.JSplitPane;
-
 import ui.Aplicacao;
-import ui.JFrameClaro;
-import ui.JFrameEscuro;
+import ui.ModoAppNormal;
 
 public class ClienteAplicacaoA {
 
@@ -46,6 +39,11 @@ public class ClienteAplicacaoA {
 	 * conhecem o tipo concreto dos produtos JFrame? Isso eh proposital e o que isso trouxe de bom para o codigo desses clientes?
 	 * O problema de replicacao da logica sobre o produto que varia foi resolvido?
 	 * 
+	 * R/ Nenhum cliente conhece o tipo concreto JFrame, é proposital sim, e agora existe a vantagem de diminuição de acoplamento
+	 * ao cliente, pois o mesmo não dá mais new em classes do tipo concreto de JFrame, também se ganhou uma grande flexibilidade e 
+	 * reuso das classes do tipo Produto, que agora são chamadas através do tipo Criador que não faz distinção entre tipos de Produto;
+	 * sim, não existe mais replicação da mesma lógica em clientes. 
+	 * 
 	 *  
 	 * 4. Considerando a aplicacao do padrao, imagine que o cliente representado pela classe 
 	 * AplicacaoClienteB, resolveu lidar com um novo tipo de produto: use um JFrame default (sem especializacoes) 
@@ -59,29 +57,39 @@ public class ClienteAplicacaoA {
 	 * 
 	 */
 	public static void main(String[] args) {
-		//codigo sem padrao: instaciando produto concreto com new e dependendo dele
-		JFrameClaro janela = new JFrameClaro();
-
-		//codigo sem padrao: manipulando logica 01 sobre o produto no proprio cliente
-		janela.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				System.exit(0);
-			}
-		});
-
-		//codigo sem padrao: manipulando logica 02 sobre o produto no proprio cliente
-		JSplitPane split = new JSplitPane();
-		split.setLeftComponent(new JPanel());
-		split.setRightComponent(new JPanel());
-		split.setDividerLocation(350);
-		janela.add(split);
-
-		//codigo sem padrao: manipulando logica 03 sobre o produto no proprio cliente
-		janela.setVisible(true);
-
-		//acesso a um metodo especifico do produto JFrameClaro, que vai variar nesta classe cliente. foco de acoplamento.
-		janela.setIconeURL("https://www.ifpb.edu.br/++theme++verde/img/favicon.ico");
+		
+//		//codigo sem padrao: instaciando produto concreto com new e dependendo dele
+//		JFrameClaro janela = new JFrameClaro();
+//
+//		//codigo sem padrao: manipulando logica 01 sobre o produto no proprio cliente
+//		janela.addWindowListener(new WindowAdapter() {
+//			@Override
+//			public void windowClosing(WindowEvent e) {
+//				System.exit(0);
+//			}
+//		});
+//
+//		//codigo sem padrao: manipulando logica 02 sobre o produto no proprio cliente
+//		JSplitPane split = new JSplitPane();
+//		split.setLeftComponent(new JPanel());
+//		split.setRightComponent(new JPanel());
+//		split.setDividerLocation(350);
+//		janela.add(split);
+//
+//		//codigo sem padrao: manipulando logica 03 sobre o produto no proprio cliente
+//		janela.setVisible(true);
+//
+//		//acesso a um metodo especifico do produto JFrameClaro, que vai variar nesta classe cliente. foco de acoplamento.
+//		janela.setIconeURL("https://www.ifpb.edu.br/++theme++verde/img/favicon.ico");
+		
+		Aplicacao aplicacao = null;
+		
+		aplicacao = new ModoAppNormal();
+		aplicacao.instalarListenerFechamento();
+		aplicacao.instalarAreasDeLayout();
+		aplicacao.iniciar();
+		
+		
 	}
 
 }
